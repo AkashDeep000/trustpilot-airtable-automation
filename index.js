@@ -4,6 +4,8 @@ import updateReview from "./controllers/updateReview.js";
 import deleteReview from "./controllers/deleteReview.js";
 import sendContactRequest from "./controllers/sendContactRequest.js";
 import backgroundHandler from "./controllers/background.js";
+import addTrustscore from "./controllers/addTrustscore.js";
+import cron from "node-cron";
 
 const app = express();
 const port = 3000;
@@ -72,3 +74,6 @@ app.listen(port, () => {
 });
 
 backgroundHandler();
+cron.schedule("0 0 * * *", async () => {
+  await addTrustscore();
+});
